@@ -1,0 +1,7 @@
+{
+  "name": "sankey-playground",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jakob Guddas <jakob.guddas@openmailbox.org>",
+  "license": "MIT"
+}
