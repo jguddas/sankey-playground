@@ -3,5 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Jakob Guddas <jakob.guddas@openmailbox.org>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "jumpstart start index.js --template-title='Sankey Playground'",
+    "build": "jumpstart build index.js --template-title='Sankey Playground'"
+  },
+  "dependencies": {
+    "@nivo/sankey": "^0.63.1",
+    "jumpstart-cli": "^5.1.0",
+    "lodash": "^4.17.20",
+    "lz-string": "^1.4.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "tabler-react": "^1.30.1",
+    "uniq": "^1.0.1"
+  }
 }
