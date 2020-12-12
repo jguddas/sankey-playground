@@ -35,6 +35,16 @@ const getInpFromSearch = () => (
   lzString.decompressFromEncodedURIComponent(window.location.search.slice(1))
 )
 
+const findCircularLink = (links, origin, targets) => links.flatMap(link => {
+  if (link.source === origin) {
+    if (targets.includes(link.target)) {
+      return link
+    }
+    return findCircularLink(links, link.target, [...targets, link.source])
+  }
+  return []
+})
+
 const App = () => {
   const [inp, setInp] = React.useState(
     getInpFromSearch()
@@ -50,7 +60,7 @@ const App = () => {
     return () => window.removeEventListener('popstate', listener)
   }, [inp, setInp])
 
-  const links = inp
+  const linksWithCircular = inp
     .split('\n')
     .map(val => val.match(/^(.+) \[([\d.]+)\] (.+)$/))
     .filter(Boolean)
@@ -60,6 +70,14 @@ const App = () => {
       value: parseFloat(value),
       target,
     }))
+  const links = linksWithCircular.reduce((acc, link) => {
+    const circular = findCircularLink(acc, link.source, [])
+    return acc.map(val => (
+      circular.findIndex(({ id }) => id === val.id) === 0
+        ? { ...val, target: `${val.target}(circular)` }
+        : val
+    ))
+  }, linksWithCircular.map((link, idx) => ({ ...link, id: idx })))
 
   return (
     <Page.Content>
