@@ -4,6 +4,7 @@ import lzString from 'lz-string'
 import uniq from 'lodash/uniq'
 import debounce from 'lodash/debounce'
 import { Page, Form, colors } from 'tabler-react'
+import { Chip } from '@nivo/tooltip'
 import { ResponsiveSankey } from '@nivo/sankey'
 import 'tabler-react/dist/Tabler.css'
 
@@ -118,6 +119,25 @@ const App = () => {
             animate={false}
             enableLinkGradient
             margin={{ top: 10, bottom: 10 }}
+            nodeTooltip={node => {
+              const targetValue = node.targetLinks.reduce((acc, targetLink) => (
+                acc + targetLink.value
+              ), 0)
+              const sourceValue = node.sourceLinks.reduce((acc, sourceLink) => (
+                acc + sourceLink.value
+              ), 0)
+              return (
+                <div style={{ whiteSpace: 'pre', display: 'flex', alignItems: 'center' }}>
+                  <strong>
+                    {node.label}
+                  </strong>
+                  <Chip color={node.color} style={{ marginLeft: 7, marginRight: 7 }} />
+                  <strong>
+                    {targetValue > sourceValue ? targetValue : sourceValue}
+                  </strong>
+                </div>
+              )
+            }}
           />
         </div>
       ) : null}
