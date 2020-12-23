@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import lzString from 'lz-string'
 import uniq from 'lodash/uniq'
+import round from 'lodash/round'
 import debounce from 'lodash/debounce'
 import { Page, Form, colors } from 'tabler-react'
 import { Chip } from '@nivo/tooltip'
@@ -133,7 +134,7 @@ const App = () => {
                   </strong>
                   <Chip color={node.color} style={{ marginLeft: 7, marginRight: 7 }} />
                   <strong>
-                    {targetValue > sourceValue ? targetValue : sourceValue}
+                    {round(targetValue > sourceValue ? targetValue : sourceValue, 10)}
                   </strong>
                 </div>
               )
