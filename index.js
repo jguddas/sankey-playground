@@ -23,14 +23,21 @@ const setSearch = debounce((value) => {
 }, 400)
 
 const defaultValue = `
-Wages [2000] Budget
-Interest [25] Budget
-Budget [500] Taxes
-Budget [450] Housing
-Budget [310] Food
-Budget [205] Transportation
-Budget [400] Health Care
-Budget [160] Other Necessities
+Opening Balances [8967] Equity
+Equity [7270] Bank
+Bank [3514] Assets
+Bank [3112] Imbalance
+Money Owed to me [1696] Assets
+Equity [1696] Money Owed to me
+Bank [1593] Expenses
+Income [950] Bank
+Salary [950] Income
+Expenses [902] Taxes
+Expenses [349] Home
+Expenses [178] Utilities
+Expenses [106] Restaurant
+Expenses [35] Groceries
+Expenses [19] Entertainment
 `.trim()
 
 const getInpFromSearch = () => (
